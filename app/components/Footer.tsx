@@ -25,7 +25,7 @@ function Footers() {
   ];
   return (
     <React.Fragment>
-      <div className="lg:ml-36 pl-10 px-4 block sm:pl-72 bg-header py-8 lg:pl-44 xl:px-0 xl:flex justify-evenly relative bottom-0 left-0">
+      <div className="lg:ml-36 pl-10 px-4 block sm:pl-72 bg-header py-8 lg:pl-44 xl:px-0 xl:pl-10 xl:flex justify-evenly relative bottom-0 left-0">
         <div>
           <h1 className="text-4xl font-bold text-white font-sans">MAJU JAYA TEAM</h1>
         </div>
