@@ -14,6 +14,9 @@ const config: Config = {
         "green-1": "#A7D7C5",
         "green-2": "#74B49B",
         "green-3": "#5C8D89",
+        "green-4": "#5C8F86",
+        header: "#75B5A6",
+        "green-base": "#F3F9F7",
       },
       container: {
         center: true,

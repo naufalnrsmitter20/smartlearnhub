@@ -1,11 +1,13 @@
 "use client";
-import { Button, Label, TextInput } from "flowbite-react";
+import { Label, Spinner, Textarea, TextInput } from "flowbite-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import type { CustomFlowbiteTheme } from "flowbite-react";
+import SpinnerProops from "../utilities/Spinner";
+import Toaster from "../utilities/Toaster";
+import { FaTelegramPlane } from "react-icons/fa";
 
 interface siswa {
-  nama: string;
   absen: number;
 }
 
@@ -36,6 +38,7 @@ function Forms() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
+    setToast(false);
     try {
       const res = await fetch(scriptURL, {
         method: "POST",
@@ -44,75 +47,80 @@ function Forms() {
       console.log("Success!", res);
 
       setIsLoading(false);
+      setToast(true);
       router.refresh();
     } catch (error) {
       console.error("Error!", (error as Error).message);
       setIsLoading(false);
+      setToast(true);
       router.refresh();
     }
   };
 
-  const listSiswa: siswa[] = [
+  const listAbsen: siswa[] = [
     {
-      nama: "Aaron Cahyadi Kurniawan",
       absen: 1,
     },
     {
-      nama: "Muhammad Zuhair Zubdi",
       absen: 2,
     },
     {
-      nama: "Naufal Nabil Ramadhan",
       absen: 3,
     },
     {
-      nama: "Raisya Ramadhani Achmad",
       absen: 4,
     },
     {
-      nama: "Salma Afiyatul Awathif",
       absen: 5,
     },
     {
-      nama: "Muhammad Syamil Muwahhid",
       absen: 6,
     },
     {
-      nama: "Muhammad Zalmaladzi El-Shirazzi",
       absen: 7,
     },
     {
-      nama: "Moh Abdul Aziz",
       absen: 8,
     },
     {
-      nama: "Sakurajima Mai",
       absen: 9,
     },
     {
-      nama: "Sangkuriang Ferdy Ardiansyah",
       absen: 10,
     },
     {
-      nama: "Tumang Vito",
       absen: 11,
     },
     {
-      nama: "Ryo",
       absen: 12,
     },
     {
-      nama: "Krung Thep Mahanakhon Amon Rattanakosin Mahinthara Ayuthaya Mahadilok Phop Noppharat Ratchathani Burirom Udomratchaniwet Mahasathan Amon Piman Awatan Sathit Sakkathattiya Witsanukam Prasit",
       absen: 13,
     },
     {
-      nama: "Juandi",
       absen: 14,
     },
     {
-      nama: "Budi Sigma",
       absen: 15,
     },
+    { absen: 16 },
+    { absen: 17 },
+    { absen: 18 },
+    { absen: 19 },
+    { absen: 20 },
+    { absen: 21 },
+    { absen: 22 },
+    { absen: 23 },
+    { absen: 24 },
+    { absen: 25 },
+    { absen: 26 },
+    { absen: 27 },
+    { absen: 28 },
+    { absen: 29 },
+    { absen: 30 },
+    { absen: 31 },
+    { absen: 32 },
+    { absen: 33 },
   ];
 
   const CKelas: Ikelas[] = [
@@ -122,58 +130,160 @@ function Forms() {
     {
       kelas: "7B",
     },
+    { kelas: "7C" },
+    { kelas: "7D" },
+    { kelas: "7E" },
+    { kelas: "7F" },
+    { kelas: "7G" },
+    { kelas: "7H" },
+    { kelas: "7I" },
+    { kelas: "7J" },
+    { kelas: "7K" },
+    { kelas: "7L" },
+    { kelas: "7M" },
+    { kelas: "7N" },
+    { kelas: "8A" },
+    { kelas: "8B" },
+    { kelas: "8C" },
+    { kelas: "8D" },
+    { kelas: "8E" },
+    { kelas: "8F" },
+    { kelas: "8G" },
+    { kelas: "8H" },
+    { kelas: "8I" },
+    { kelas: "8J" },
+    { kelas: "8K" },
+    { kelas: "8L" },
+    { kelas: "8M" },
+    { kelas: "8N" },
+    { kelas: "9A" },
+    { kelas: "9B" },
+    { kelas: "9C" },
+    { kelas: "9D" },
+    { kelas: "9E" },
+    { kelas: "9F" },
+    { kelas: "9G" },
+    { kelas: "9H" },
+    { kelas: "9I" },
+    { kelas: "9J" },
+    { kelas: "9K" },
+    { kelas: "9L" },
+    { kelas: "9M" },
+    { kelas: "9N" },
   ];
 
   return (
     <React.Fragment>
-      <main className="container ml-80">
-        <form name="form-pengaduan" onSubmit={handleSubmit} className="grid grid-cols-2 max-w-7xl gap-4">
+      <main className="container">
+        <form name="form-pengaduan" onSubmit={handleSubmit} className="grid grid-cols-1 max-w-3xl mx-auto gap-4 mb-10 sm:ml-60">
           <div className="mb-2">
             <div className="mb-2 block">
-              <Label htmlFor="kelas" value="Kelas" />
+              <Label htmlFor="kelas" className="font-sans font-semibold text-lg text-green-3" value="Kelas" />
             </div>
-            <TextInput theme={customForms} value={kelas} onChange={(e) => setKelas(e.target.value)} color={"green"} id="kelas" type="text" name="kelas" placeholder="name@flowbite.com" required />
+            <select className="w-full rounded-md border-green-3 border focus:ring-2 focus:ring-green-2 outline-none" value={kelas} onChange={(e) => setKelas(e.target.value)} id="kelas" name="kelas" required>
+              <option value=""></option>
+              {CKelas.map((kelas, i) => (
+                <option className="font-medium tracking-wide" key={i} value={kelas.kelas}>
+                  {kelas.kelas}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="mb-2">
             <div className="mb-2 block">
-              <Label htmlFor="nama" value="Nama" />
+              <Label htmlFor="nama" className="font-sans font-semibold text-lg text-green-3" value="Nama" />
             </div>
-            <TextInput theme={customForms} value={nama} onChange={(e) => setNama(e.target.value)} color={"green"} id="nama" type="text" name="nama" placeholder="name@flowbite.com" required />
+            <TextInput className="font-medium tracking-wide" theme={customForms} value={nama} onChange={(e) => setNama(e.target.value)} color={"green"} id="nama" type="text" name="nama" placeholder="Masukkan Nama Kamu" required />
           </div>
           <div className="mb-2">
             <div className="mb-2 block">
-              <Label htmlFor="absen" value="No Absen" />
+              <Label htmlFor="absen" className="font-sans font-semibold text-lg text-green-3" value="No Absen" />
             </div>
-            <TextInput theme={customForms} value={absen} onChange={(e) => setAbsen(e.target.value)} color={"green"} id="absen" type="text" name="absen" placeholder="name@flowbite.com" required />
+            <select value={absen} className="w-full rounded-md border-green-3 border focus:ring-2 focus:ring-green-2 outline-none" onChange={(e) => setAbsen(e.target.value)} id="absen" name="absen" required>
+              <option value=""></option>
+              {listAbsen.map((absen, i) => (
+                <option className="font-medium tracking-wide" key={i} value={absen.absen}>
+                  {absen.absen}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="mb-2">
             <div className="mb-2 block">
-              <Label htmlFor="laporan" value="Nama Laporan" />
+              <Label htmlFor="laporan" className="font-sans font-semibold text-lg text-green-3" value="Nama Laporan" />
             </div>
-            <TextInput theme={customForms} value={laporan} onChange={(e) => setLaporan(e.target.value)} color={"green"} id="laporan" type="text" name="laporan" placeholder="name@flowbite.com" required />
+            <TextInput
+              className="font-medium tracking-wide"
+              theme={customForms}
+              value={laporan}
+              onChange={(e) => setLaporan(e.target.value)}
+              color={"green"}
+              id="laporan"
+              type="text"
+              name="laporan"
+              placeholder="Apa yang ingin kamu laporkan?"
+              required
+            />
           </div>
           <div className="mb-2">
             <div className="mb-2 block">
-              <Label htmlFor="bukti" value="Bukti" />
+              <Label htmlFor="bukti" className="font-sans font-semibold text-lg text-green-3" value="Bukti" />
             </div>
-            <TextInput theme={customForms} value={bukti} onChange={(e) => setbukti(e.target.value)} color={"green"} id="bukti" type="text" name="bukti" placeholder="name@flowbite.com" required={false} />
+            <TextInput
+              className="font-medium tracking-wide"
+              theme={customForms}
+              value={bukti}
+              onChange={(e) => setbukti(e.target.value)}
+              color={"green"}
+              id="bukti"
+              type="text"
+              name="bukti"
+              placeholder="Bukti pelaporan (kirim berupa link)"
+              required={false}
+            />
           </div>
           <div className="mb-2">
             <div className="mb-2 block">
-              <Label htmlFor="keterangan" value="Keterangan" />
+              <Label htmlFor="keterangan" className="font-sans font-semibold text-lg text-green-3" value="Keterangan" />
             </div>
-            <TextInput theme={customForms} value={keterangan} onChange={(e) => setKeterangan(e.target.value)} color={"green"} id="keterangan" type="text" name="keterangan" placeholder="name@flowbite.com" required />
+            <Textarea
+              className="font-medium tracking-wide w-full"
+              theme={customForms}
+              value={keterangan}
+              onChange={(e) => setKeterangan(e.target.value)}
+              color={"green"}
+              id="keterangan"
+              name="keterangan"
+              placeholder="Keterangan Laporan"
+              required
+            ></Textarea>
           </div>
           <div className="mb-2">
             <div className="mb-2 block">
-              <Label htmlFor="noHP" value="No. Telepon " />
+              <Label htmlFor="noHP" className="font-sans font-semibold text-lg text-green-3" value="No. Telepon " />
             </div>
-            <TextInput theme={customForms} value={noHP} onChange={(e) => setNoHP(e.target.value)} color={"green"} id="noHP" type="text" name="noHP" placeholder="name@flowbite.com" required />
+            <TextInput className="font-medium tracking-wide" theme={customForms} value={noHP} onChange={(e) => setNoHP(e.target.value)} color={"green"} id="noHP" type="text" name="noHP" placeholder="Nomor Hp Kamu" required />
           </div>
           <div></div>
-          <button type="submit" className="text-white bg-green-3 hover:bg-green-2 focus:ring-4 focus:ring-green-1 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 ">
-            Submit
-          </button>
+          {!loading ? (
+            <>
+              {!toasts ? (
+                <button type="submit" className="text-white bg-green-3 hover:bg-green-2 focus:ring-4 focus:ring-green-1 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 ">
+                  Submit
+                </button>
+              ) : (
+                <button type="button" disabled={true} className="text-white bg-green-2  font-medium rounded-lg text-sm px-5 py-2.5 mb-2 ">
+                  Terkirim
+                </button>
+              )}
+            </>
+          ) : (
+            <button className="text-white justify-center bg-green-3 flex hover:bg-green-2 focus:ring-4 focus:ring-green-1 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 ">
+              <Spinner theme={SpinnerProops.spinner} color="white" />
+              <p className="ml-3 pt-0.5 text-[12px] font-semibold lg:text-[14px]">Loading...</p>
+            </button>
+          )}
+          {toasts && <Toaster type={<FaTelegramPlane className="h5 w-5" />} message="Pengaduanmu Berhasil Terkirim" />}
         </form>
       </main>
     </React.Fragment>
