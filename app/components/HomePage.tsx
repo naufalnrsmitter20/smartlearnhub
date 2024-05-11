@@ -7,7 +7,7 @@ import Image from "next/image";
 function HomePage() {
   return (
     <React.Fragment>
-      <main className="md:ml-80 sm:ml-64 mb-10">
+      <main className="md:ml-80 sm:ml-64 mb-10 md:mr-6">
         <div className="p-10 max-w-7xl bg-green-base my-8">
           <h4 className="text-green-4 text-3xl font-bold font-sans">Penjelasan Singkat</h4>
           <p className="text-green-4 xl:pr-64 text-base font-normal mt-6 font-sans">
