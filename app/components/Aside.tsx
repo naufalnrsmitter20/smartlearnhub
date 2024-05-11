@@ -1,35 +1,13 @@
-"use client";
-import React, { useState } from "react";
+import React from "react";
 
 import Link from "next/link";
 import Image from "next/image";
 import MTSNLOGO from "@/public/MTsN-1-Kota-Malang-PNG.png";
-import Aside from "./Aside";
 
-function Sidebars() {
-  const [modal, setmodal] = useState(false);
-  const handlemodal = () => {
-    setmodal(!modal);
-  };
+function Aside() {
   return (
     <React.Fragment>
-      <button
-        data-collapse-toggle="navbar-dropdown"
-        type="button"
-        onClick={() => handlemodal()}
-        className="inline-flex absolute top-4 right-4 z-10 items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-        aria-controls="navbar-dropdown"
-        aria-expanded="false"
-      >
-        <span className="sr-only">Open main menu</span>
-        <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" />
-        </svg>
-      </button>
-
-      {modal && <Aside />}
-
-      <aside className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+      <aside className="fixed top-0 left-0 z-40 w-64 h-screen sm:hidden" aria-label="Sidebar">
         <div className="h-full px-3 py-4 overflow-y-auto bg-green-1 dark:bg-gray-800">
           <Link target="_blank" href="https://mtsn1kotamalang.sch.id/" className="flex items-center ps-2.5 mb-5">
             <Image src={MTSNLOGO} width={60} height={60} className="me-3 " alt="Telkom" />
@@ -69,4 +47,4 @@ function Sidebars() {
   );
 }
 
-export default Sidebars;
+export default Aside;
