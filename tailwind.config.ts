@@ -9,6 +9,16 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        white: "#F4F9F4",
+        "green-1": "#A7D7C5",
+        "green-2": "#74B49B",
+        "green-3": "#5C8D89",
+      },
+      container: {
+        center: true,
+        padding: "2rem",
+      },
     },
   },
   plugins: [flowbite.plugin()],
