@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Maju Jaya",
+  title: "Smart Learn Hub",
   description: "Website E-Book dan Pengaduan Siswa",
 };
 
